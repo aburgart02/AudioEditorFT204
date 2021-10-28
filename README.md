@@ -30,13 +30,13 @@
 
 2) Application - Выбор определенного действия для преобразования аудиодорожки. (Обращение к сущности, реализующей данный функционал: new AudioChanger(), new FormatConvertor(), ...)
 
-3) Domain - Функции, отвечающие за изменение аудиодорожки (Функции: CutAudio, CycleAudio, InverseAudio, MergeAudio...)
+3) Domain - Функции, отвечающие за изменение аудиодорожки (Сущность аудиодорожки, функции: CutAudio, CycleAudio, InverseAudio, MergeAudio...)
 
 4) Infrastructure - Функция изменения формата файла, функции открытия и сохранения аудиофайла. (IOpener, ISaver, IConvertor, IParser, ...)
 
 # Взаимодействие слоев:
 
-Application взаимодействует с UI. Слой Application взаимодействует со слоем Domain и Infrastructure.
+Слой Application взаимодействует со слоем Domain и UI. Domain взаимодействует с Infrastructure.
 
 # Технологии:
 
