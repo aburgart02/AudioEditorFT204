@@ -19,7 +19,9 @@ namespace Audio_Editor
     public partial class Form1 : Form
     {
         public MediaPlayer player = new MediaPlayer();
-        public Mp3FileReader reader;
+        public MediaFoundationReader reader;
+        public string path;
+        public int index = 0;
 
         public Form1()
         {
@@ -39,8 +41,8 @@ namespace Audio_Editor
                 try
                 {
                     player.Open(new Uri(open_dialog.FileName));
-                    reader = new Mp3FileReader(open_dialog.FileName);
-
+                    path = open_dialog.FileName;
+                    reader = new MediaFoundationReader(open_dialog.FileName);
                 }
                 catch
                 {
@@ -53,7 +55,7 @@ namespace Audio_Editor
         public void SaveButton_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (sfd.ShowDialog() == DialogResult.OK)
             {
                 using (var rdr = reader)
                 using (var waveFileWriter = new WaveFileWriter(sfd.FileName, rdr.WaveFormat))
@@ -68,48 +70,46 @@ namespace Audio_Editor
             }
         }
 
-        //public static class WavFileUtils
-        //{
-        //    public static void TrimWavFile(string inPath, string outPath, TimeSpan cutFromStart, TimeSpan cutFromEnd)
-        //    {
-        //        using (NAudio.Wave.WaveFileReader reader = new NAudio.Wave.WaveFileReader(inPath))
-        //        {
-        //            using (NAudio.Wave.WaveFileWriter writer = new NAudio.Wave.WaveFileWriter(outPath, reader.WaveFormat))
-        //            {
-        //                int bytesPerMillisecond = reader.WaveFormat.AverageBytesPerSecond / 1000;
+        public void TrimWavFile(TimeSpan cutFromStart, TimeSpan cutFromEnd)
+        {
+            using (var rdr = reader)
+            {
+                using (var writer = new WaveFileWriter(
+                    Environment.CurrentDirectory + @"\temp" + index + ".wav", rdr.WaveFormat))
+                {
+                    int bytesPerMillisecond = rdr.WaveFormat.AverageBytesPerSecond / 1000;
+                    int startPos = (int)cutFromStart.TotalMilliseconds * bytesPerMillisecond;
+                    startPos = startPos - startPos % rdr.WaveFormat.BlockAlign;
+                    int endBytes = (int)cutFromEnd.TotalMilliseconds * bytesPerMillisecond;
+                    endBytes = endBytes - endBytes % rdr.WaveFormat.BlockAlign;
+                    int endPos = (int)rdr.Length - endBytes;
+                    TrimWavFile(rdr, writer, startPos, endPos);
+                }
+            }
+            reader = new MediaFoundationReader(Environment.CurrentDirectory + @"\temp" + index + ".wav");
+            player.Open(new Uri(Environment.CurrentDirectory + @"\temp" + index + ".wav"));
+            index += 1;
+        }
 
-        //                int startPos = (int)cutFromStart.TotalMilliseconds * bytesPerMillisecond;
-        //                startPos = startPos - startPos % reader.WaveFormat.BlockAlign;
-
-        //                int endBytes = (int)cutFromEnd.TotalMilliseconds * bytesPerMillisecond;
-        //                endBytes = endBytes - endBytes % reader.WaveFormat.BlockAlign;
-        //                int endPos = (int)reader.Length - endBytes;
-
-        //                TrimWavFile(reader, writer, startPos, endPos);
-        //            }
-        //        }
-        //    }
-
-        //    private static void TrimWavFile(NAudio.Wave.WaveFileReader reader, NAudio.Wave.WaveFileWriter writer, 
-        //        int startPos, int endPos)
-        //    {
-        //        reader.Position = startPos;
-        //        byte[] buffer = new byte[1024];
-        //        while (reader.Position < endPos)
-        //        {
-        //            int bytesRequired = (int)(endPos - reader.Position);
-        //            if (bytesRequired > 0)
-        //            {
-        //                int bytesToRead = Math.Min(bytesRequired, buffer.Length);
-        //                int bytesRead = reader.Read(buffer, 0, bytesToRead);
-        //                if (bytesRead > 0)
-        //                {
-        //                    writer.WriteData(buffer, 0, bytesRead);
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+        public void TrimWavFile(MediaFoundationReader reader, WaveFileWriter writer,
+            int startPos, int endPos)
+        {
+            reader.Position = startPos;
+            byte[] buffer = new byte[1024];
+            while (reader.Position < endPos)
+            {
+                int bytesRequired = (int)(endPos - reader.Position);
+                if (bytesRequired > 0)
+                {
+                    int bytesToRead = Math.Min(bytesRequired, buffer.Length);
+                    int bytesRead = reader.Read(buffer, 0, bytesToRead);
+                    if (bytesRead > 0)
+                    {
+                        writer.Write(buffer, 0, bytesRead);
+                    }
+                }
+            }
+        }
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
@@ -119,6 +119,11 @@ namespace Audio_Editor
         private void PauseButton_Click(object sender, EventArgs e)
         {
             player.Pause();
+        }
+
+        private void CutAudio_Click(object sender, EventArgs e)
+        {
+            TrimWavFile(new TimeSpan(0, 0, 30), new TimeSpan(0, 0, 0));
         }
     }
 }

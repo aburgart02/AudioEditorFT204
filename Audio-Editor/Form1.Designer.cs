@@ -34,8 +34,9 @@ namespace Audio_Editor
             this.PauseButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.SaveButton = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.CutAudio = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -92,16 +93,6 @@ namespace Audio_Editor
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(455, 233);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // SaveButton
             // 
             this.SaveButton.Location = new System.Drawing.Point(8, 61);
@@ -112,11 +103,32 @@ namespace Audio_Editor
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(455, 233);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // CutAudio
+            // 
+            this.CutAudio.Location = new System.Drawing.Point(714, 291);
+            this.CutAudio.Name = "CutAudio";
+            this.CutAudio.Size = new System.Drawing.Size(198, 53);
+            this.CutAudio.TabIndex = 4;
+            this.CutAudio.Text = "Cut";
+            this.CutAudio.UseVisualStyleBackColor = true;
+            this.CutAudio.Click += new System.EventHandler(this.CutAudio_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.CutAudio);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.PauseButton);
             this.Controls.Add(this.PlayButton);
@@ -138,6 +150,7 @@ namespace Audio_Editor
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.Button CutAudio;
     }
 }
 
