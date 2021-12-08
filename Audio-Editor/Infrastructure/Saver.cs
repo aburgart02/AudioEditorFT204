@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
 using NAudio.Wave;
 
-
 namespace Audio_Editor.Infrastructure
 {
     public interface ISaver
@@ -16,18 +15,14 @@ namespace Audio_Editor.Infrastructure
             using (var rdr = Globals.reader)
             using (var waveFileWriter = new WaveFileWriter(sfd.FileName, rdr.WaveFormat))
             {
-                MediaFoundationReader[] tracks = new MediaFoundationReader[loopCount];
+                var tracks = new MediaFoundationReader[loopCount];
                 for (var i = 0; i < loopCount; i++)
                     tracks[i] = new MediaFoundationReader(Globals.path);
-                byte[] buffer = new byte[rdr.WaveFormat.AverageBytesPerSecond];
+                var buffer = new byte[rdr.WaveFormat.AverageBytesPerSecond];
                 int read;
                 foreach (var track in tracks)
-                {
                     while ((read = track.Read(buffer, 0, buffer.Length)) > 0)
-                    {
                         waveFileWriter.Write(buffer, 0, read);
-                    }
-                }
             }
         }
     }

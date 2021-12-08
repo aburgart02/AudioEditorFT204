@@ -2,147 +2,154 @@
 
 namespace Audio_Editor.Domain
 {
-    static class MetadataReverser
+    internal static class MetadataReverser
     {
         internal static ushort GetTypeOfFormat(byte[] forwardsWavFileStreamByteArray)
         {
-            int startIndex = 20;
-            int endIndex = 21;
-            byte[] typeOfFormatByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, startIndex, endIndex);
-            ushort typeOfFormat = BitConverter.ToUInt16(typeOfFormatByteArray, 0);
+            var startIndex = 20;
+            var endIndex = 21;
+            var typeOfFormatByteArray =
+                GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, startIndex, endIndex);
+            var typeOfFormat = BitConverter.ToUInt16(typeOfFormatByteArray, 0);
             Console.WriteLine("Type of format (1 is PCM) = {0}", typeOfFormat);
             return typeOfFormat;
         }
 
         internal static void GetFmtText(byte[] forwardsWavFileStreamByteArray)
         {
-            int startIndex = 12;
-            int endIndex = 15;
+            var startIndex = 12;
+            var endIndex = 15;
             GetAsciiText(forwardsWavFileStreamByteArray, startIndex, endIndex);
         }
 
         internal static string GetWaveText(byte[] forwardsWavFileStreamByteArray)
         {
-            int startIndex = 8;
-            int endIndex = 11;
+            var startIndex = 8;
+            var endIndex = 11;
             return GetAsciiText(forwardsWavFileStreamByteArray, startIndex, endIndex);
         }
 
         internal static string GetRiffText(byte[] forwardsWavFileStreamByteArray)
         {
-            int startIndex = 0;
-            int endIndex = 3;
+            var startIndex = 0;
+            var endIndex = 3;
             return GetAsciiText(forwardsWavFileStreamByteArray, startIndex, endIndex);
         }
 
         internal static uint GetLengthOfFormatData(byte[] forwardsWavFileStreamByteArray)
         {
-            int startIndex = 16;
-            int endIndex = 19;
-            byte[] lengthOfFormatDataByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, startIndex, endIndex);
-            uint lengthOfFormatData = BitConverter.ToUInt32(lengthOfFormatDataByteArray, 0);
+            var startIndex = 16;
+            var endIndex = 19;
+            var lengthOfFormatDataByteArray =
+                GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, startIndex, endIndex);
+            var lengthOfFormatData = BitConverter.ToUInt32(lengthOfFormatDataByteArray, 0);
             Console.WriteLine("Length of format data = {0}", lengthOfFormatData);
             return lengthOfFormatData;
         }
 
-        internal static byte[] GetRelevantBytesIntoNewArray(byte[] forwardsWavFileStreamByteArray, int startIndex, int endIndex)
+        internal static byte[] GetRelevantBytesIntoNewArray(byte[] forwardsWavFileStreamByteArray, int startIndex,
+            int endIndex)
         {
-            int length = endIndex - startIndex + 1;
-            byte[] relevantBytesArray = new byte[length];
+            var length = endIndex - startIndex + 1;
+            var relevantBytesArray = new byte[length];
             Array.Copy(forwardsWavFileStreamByteArray, startIndex, relevantBytesArray, 0, length);
             return relevantBytesArray;
         }
 
         internal static uint GetFileSize(byte[] forwardsWavFileStreamByteArray)
         {
-            int fileSizeStartIndex = 4;
-            int fileSizeEndIndex = 7;
-            byte[] fileSizeByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, fileSizeStartIndex, fileSizeEndIndex);
-            uint fileSize = BitConverter.ToUInt32(fileSizeByteArray, 0) + 8;
+            var fileSizeStartIndex = 4;
+            var fileSizeEndIndex = 7;
+            var fileSizeByteArray =
+                GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, fileSizeStartIndex, fileSizeEndIndex);
+            var fileSize = BitConverter.ToUInt32(fileSizeByteArray, 0) + 8;
             Console.WriteLine("File size = {0}", fileSize);
             return fileSize;
         }
 
         internal static string GetAsciiText(byte[] forwardsWavFileStreamByteArray, int startIndex, int endIndex)
         {
-            string asciiText = "";
-            for (int i = startIndex; i <= endIndex; i++)
-            {
-                asciiText += Convert.ToChar(forwardsWavFileStreamByteArray[i]);
-            }
+            var asciiText = "";
+            for (var i = startIndex; i <= endIndex; i++) asciiText += Convert.ToChar(forwardsWavFileStreamByteArray[i]);
             Console.WriteLine(asciiText);
             return asciiText;
         }
 
         internal static ushort GetNumOfChannels(byte[] forwardsWavFileStreamByteArray)
         {
-            int numOfChannelsStartIndex = 22;
-            int numOfChannelsEndIndex = 23;
-            byte[] numOfChannelsByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, numOfChannelsStartIndex, numOfChannelsEndIndex);
-            ushort numOfChannels = BitConverter.ToUInt16(numOfChannelsByteArray, 0);
+            var numOfChannelsStartIndex = 22;
+            var numOfChannelsEndIndex = 23;
+            var numOfChannelsByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray,
+                numOfChannelsStartIndex, numOfChannelsEndIndex);
+            var numOfChannels = BitConverter.ToUInt16(numOfChannelsByteArray, 0);
             Console.WriteLine("Number Of Channels = {0}", numOfChannels);
             return numOfChannels;
         }
 
         internal static uint GetSampleRate(byte[] forwardsWavFileStreamByteArray)
         {
-            int sampleRateStartIndex = 24;
-            int sampleRateEndIndex = 27;
-            byte[] sampleRateByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, sampleRateStartIndex, sampleRateEndIndex);
-            uint sampleRate = BitConverter.ToUInt32(sampleRateByteArray, 0);
+            var sampleRateStartIndex = 24;
+            var sampleRateEndIndex = 27;
+            var sampleRateByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, sampleRateStartIndex,
+                sampleRateEndIndex);
+            var sampleRate = BitConverter.ToUInt32(sampleRateByteArray, 0);
             Console.WriteLine("Sample Rate = {0}", sampleRate);
             return sampleRate;
         }
 
         internal static uint GetBytesPerSecond(byte[] forwardsWavFileStreamByteArray)
         {
-            int bytesPerSecondStartIndex = 28;
-            int bytesPerSecondEndIndex = 31;
-            byte[] bytesPerSecondByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, bytesPerSecondStartIndex, bytesPerSecondEndIndex);
-            uint bytesPerSecond = BitConverter.ToUInt32(bytesPerSecondByteArray, 0);
+            var bytesPerSecondStartIndex = 28;
+            var bytesPerSecondEndIndex = 31;
+            var bytesPerSecondByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray,
+                bytesPerSecondStartIndex, bytesPerSecondEndIndex);
+            var bytesPerSecond = BitConverter.ToUInt32(bytesPerSecondByteArray, 0);
             Console.WriteLine("Bytes Per Second = {0}", bytesPerSecond);
             return bytesPerSecond;
         }
 
         internal static ushort GetBlockAlign(byte[] forwardsWavFileStreamByteArray)
         {
-            int blockAlignStartIndex = 32;
-            int blockAlignEndIndex = 33;
-            byte[] blockAlignByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, blockAlignStartIndex, blockAlignEndIndex);
-            ushort blockAlign = BitConverter.ToUInt16(blockAlignByteArray, 0);
+            var blockAlignStartIndex = 32;
+            var blockAlignEndIndex = 33;
+            var blockAlignByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, blockAlignStartIndex,
+                blockAlignEndIndex);
+            var blockAlign = BitConverter.ToUInt16(blockAlignByteArray, 0);
             Console.WriteLine("Block Align = {0}", blockAlign);
             return blockAlign;
         }
 
         internal static ushort GetBitsPerSample(byte[] forwardsWavFileStreamByteArray)
         {
-            int bitsPerSampleStartIndex = 34;
-            int bitsPerSampleEndIndex = 35;
-            byte[] bitsPerSampleByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, bitsPerSampleStartIndex, bitsPerSampleEndIndex);
-            ushort bitsPerSample = BitConverter.ToUInt16(bitsPerSampleByteArray, 0); 
+            var bitsPerSampleStartIndex = 34;
+            var bitsPerSampleEndIndex = 35;
+            var bitsPerSampleByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray,
+                bitsPerSampleStartIndex, bitsPerSampleEndIndex);
+            var bitsPerSample = BitConverter.ToUInt16(bitsPerSampleByteArray, 0);
             Console.WriteLine("Bits Per Sample = {0}", bitsPerSample);
             return bitsPerSample;
         }
 
         internal static void GetDataText(byte[] forwardsWavFileStreamByteArray)
         {
-            int startIndex = 70;
-            int endIndex = 73;
+            var startIndex = 70;
+            var endIndex = 73;
             GetAsciiText(forwardsWavFileStreamByteArray, startIndex, endIndex);
         }
 
         internal static void GetListText(byte[] forwardsWavFileStreamByteArray)
         {
-            int startIndex = 36;
-            int endIndex = 39;
+            var startIndex = 36;
+            var endIndex = 39;
             GetAsciiText(forwardsWavFileStreamByteArray, startIndex, endIndex);
         }
 
         internal static uint GetDataSize(byte[] forwardsWavFileStreamByteArray)
         {
-            int dataSizeStartIndex = 70;
-            int dataSizeEndIndex = 73;
-            byte[] dataSizeByteArray = GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, dataSizeStartIndex, dataSizeEndIndex);
+            var dataSizeStartIndex = 70;
+            var dataSizeEndIndex = 73;
+            var dataSizeByteArray =
+                GetRelevantBytesIntoNewArray(forwardsWavFileStreamByteArray, dataSizeStartIndex, dataSizeEndIndex);
             uint dataSize = BitConverter.ToUInt16(dataSizeByteArray, 0);
             Console.WriteLine("Data Size = {0}", dataSize);
             return dataSize;
