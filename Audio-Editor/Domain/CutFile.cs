@@ -42,6 +42,7 @@ namespace Audio_Editor.Domain
                 var bytesToRead = Math.Min(bytesRequired, buffer.Length);
                 var bytesRead = reader.Read(buffer, 0, bytesToRead);
                 if (bytesRead > 0) writer.Write(buffer, 0, bytesRead);
+                if (bytesRead == 0) break;
             }
         }
     }
