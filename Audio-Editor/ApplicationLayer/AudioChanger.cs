@@ -13,12 +13,12 @@ namespace Audio_Editor.ApplicationLayer
     {
         public void CutFile(TimeSpan start, TimeSpan end)
         {
-            Domain.CutFile.TrimWavFile(start, end);
+            Domain.CutAudio.TrimWavFile(start, end);
         }
 
         public void ReverseFile()
         {
-            Domain.ReverseFile.Start(Globals.path);
+            Domain.ReverseAudio.Start(Globals.path);
         }
     }
 }

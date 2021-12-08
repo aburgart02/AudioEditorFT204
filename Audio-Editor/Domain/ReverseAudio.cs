@@ -5,7 +5,7 @@ using NAudio.Wave;
 
 namespace Audio_Editor.Domain
 {
-    public class ReverseFile
+    public class ReverseAudio
     {
         private const int _bitsPerByte = 8;
         private static int _bytesPerSample;
@@ -22,20 +22,20 @@ namespace Audio_Editor.Domain
 
         private static void getWavMetadata(byte[] forwardsWavFileStreamByteArray)
         {
-            MetadataReverser.GetRiffText(forwardsWavFileStreamByteArray);
-            MetadataReverser.GetFileSize(forwardsWavFileStreamByteArray);
-            MetadataReverser.GetWaveText(forwardsWavFileStreamByteArray);
-            MetadataReverser.GetFmtText(forwardsWavFileStreamByteArray);
-            MetadataReverser.GetLengthOfFormatData(forwardsWavFileStreamByteArray);
-            MetadataReverser.GetTypeOfFormat(forwardsWavFileStreamByteArray);
-            MetadataReverser.GetNumOfChannels(forwardsWavFileStreamByteArray);
-            MetadataReverser.GetSampleRate(forwardsWavFileStreamByteArray);
-            MetadataReverser.GetBytesPerSecond(forwardsWavFileStreamByteArray);
-            MetadataReverser.GetBlockAlign(forwardsWavFileStreamByteArray);
-            _bytesPerSample = MetadataReverser.GetBitsPerSample(forwardsWavFileStreamByteArray) / _bitsPerByte;
-            MetadataReverser.GetListText(forwardsWavFileStreamByteArray);
-            MetadataReverser.GetDataText(forwardsWavFileStreamByteArray);
-            MetadataReverser.GetDataSize(forwardsWavFileStreamByteArray);
+            ReverseMetadata.GetRiffText(forwardsWavFileStreamByteArray);
+            ReverseMetadata.GetFileSize(forwardsWavFileStreamByteArray);
+            ReverseMetadata.GetWaveText(forwardsWavFileStreamByteArray);
+            ReverseMetadata.GetFmtText(forwardsWavFileStreamByteArray);
+            ReverseMetadata.GetLengthOfFormatData(forwardsWavFileStreamByteArray);
+            ReverseMetadata.GetTypeOfFormat(forwardsWavFileStreamByteArray);
+            ReverseMetadata.GetNumOfChannels(forwardsWavFileStreamByteArray);
+            ReverseMetadata.GetSampleRate(forwardsWavFileStreamByteArray);
+            ReverseMetadata.GetBytesPerSecond(forwardsWavFileStreamByteArray);
+            ReverseMetadata.GetBlockAlign(forwardsWavFileStreamByteArray);
+            _bytesPerSample = ReverseMetadata.GetBitsPerSample(forwardsWavFileStreamByteArray) / _bitsPerByte;
+            ReverseMetadata.GetListText(forwardsWavFileStreamByteArray);
+            ReverseMetadata.GetDataText(forwardsWavFileStreamByteArray);
+            ReverseMetadata.GetDataSize(forwardsWavFileStreamByteArray);
         }
 
         private static void writeReversedWavFileByteArrayToFile(byte[] reversedWavFileStreamByteArray)
@@ -47,11 +47,8 @@ namespace Audio_Editor.Domain
                 reversedFileStream.Write(reversedWavFileStreamByteArray, 0, reversedWavFileStreamByteArray.Length);
             }
 
-            Globals.reader =
-                new MediaFoundationReader(Environment.CurrentDirectory + @"\temp" + Globals.index + ".wav");
-            Globals.player.Open(new Uri(Environment.CurrentDirectory + @"\temp" + Globals.index + ".wav"));
-            Globals.path = Environment.CurrentDirectory + @"\temp" + Globals.index + ".wav";
-            Globals.index += 1;
+            var updater = new Updater();
+            updater.UpdateAudio();
         }
 
         private static byte[] populateReversedWavFileByteArray(byte[] forwardsWavFileStreamByteArray,

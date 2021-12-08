@@ -4,7 +4,7 @@ using NAudio.Wave;
 
 namespace Audio_Editor.Domain
 {
-    internal class CutFile
+    internal class CutAudio
     {
         public static void TrimWavFile(TimeSpan cutFromStart, TimeSpan cutFromEnd)
         {
@@ -23,11 +23,8 @@ namespace Audio_Editor.Domain
                 }
             }
 
-            Globals.reader =
-                new MediaFoundationReader(Environment.CurrentDirectory + @"\temp" + Globals.index + ".wav");
-            Globals.player.Open(new Uri(Environment.CurrentDirectory + @"\temp" + Globals.index + ".wav"));
-            Globals.path = Environment.CurrentDirectory + @"\temp" + Globals.index + ".wav";
-            Globals.index += 1;
+            var updater = new Updater();
+            updater.UpdateAudio();
         }
 
         public static void TrimWavFile(MediaFoundationReader reader, WaveFileWriter writer,

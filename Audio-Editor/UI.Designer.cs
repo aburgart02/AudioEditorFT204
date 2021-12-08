@@ -51,6 +51,7 @@ namespace Audio_Editor
             this.CycleCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.LoopCountValue = new System.Windows.Forms.TextBox();
+            this.Mp3ToWavButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -247,11 +248,22 @@ namespace Audio_Editor
             this.LoopCountValue.Size = new System.Drawing.Size(143, 22);
             this.LoopCountValue.TabIndex = 16;
             // 
-            // Form1
+            // Mp3ToWavButton
+            // 
+            this.Mp3ToWavButton.Location = new System.Drawing.Point(753, 218);
+            this.Mp3ToWavButton.Name = "Mp3ToWavButton";
+            this.Mp3ToWavButton.Size = new System.Drawing.Size(165, 43);
+            this.Mp3ToWavButton.TabIndex = 17;
+            this.Mp3ToWavButton.Text = "Covert To Wave Format";
+            this.Mp3ToWavButton.UseVisualStyleBackColor = true;
+            this.Mp3ToWavButton.Click += new System.EventHandler(this.Mp3ToWavButton_Click);
+            // 
+            // UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.Mp3ToWavButton);
             this.Controls.Add(this.LoopCountValue);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CycleCheckBox);
@@ -267,7 +279,7 @@ namespace Audio_Editor
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.PauseButton);
             this.Controls.Add(this.PlayButton);
-            this.Name = "Form1";
+            this.Name = "UI";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
@@ -300,6 +312,7 @@ namespace Audio_Editor
         private System.Windows.Forms.CheckBox CycleCheckBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox LoopCountValue;
+        private System.Windows.Forms.Button Mp3ToWavButton;
     }
 }
 

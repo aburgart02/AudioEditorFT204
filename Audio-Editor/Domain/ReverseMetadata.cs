@@ -2,7 +2,7 @@
 
 namespace Audio_Editor.Domain
 {
-    internal static class MetadataReverser
+    internal static class ReverseMetadata
     {
         internal static ushort GetTypeOfFormat(byte[] forwardsWavFileStreamByteArray)
         {

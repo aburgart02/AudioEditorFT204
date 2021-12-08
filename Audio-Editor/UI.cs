@@ -30,7 +30,7 @@ namespace Audio_Editor
         public void SaveButton_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            var saver = new Infrastructure.Saver();
+            var saver = new Saver();
             var loopCount = LoopCountValue.Text;
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -117,6 +117,12 @@ namespace Audio_Editor
         {
             var audioChanger = new AudioChanger();
             audioChanger.ReverseFile();
+        }
+
+        private void Mp3ToWavButton_Click(object sender, EventArgs e)
+        {
+            var formatConverter = new FormatConverter();
+            formatConverter.ConvertMp3ToWav();
         }
     }
 }

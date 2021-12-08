@@ -139,9 +139,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationLayer\AudioChanger.cs" />
-    <Compile Include="Domain\CutFile.cs" />
-    <Compile Include="Domain\MetadataReverser.cs" />
-    <Compile Include="Domain\ReverseFile.cs" />
+    <Compile Include="ApplicationLayer\FormatConverter.cs" />
+    <Compile Include="Domain\Mp3ToWavConversion.cs" />
+    <Compile Include="Domain\WavToMp3Conversion.cs" />
+    <Compile Include="Domain\CutAudio.cs" />
+    <Compile Include="Domain\ReverseMetadata.cs" />
+    <Compile Include="Domain\ReverseAudio.cs" />
+    <Compile Include="Infrastructure\Updater.cs" />
     <Compile Include="Infrastructure\Globals.cs" />
     <Compile Include="Infrastructure\Opener.cs" />
     <Compile Include="Infrastructure\Saver.cs" />
