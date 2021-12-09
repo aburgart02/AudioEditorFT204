@@ -19,7 +19,7 @@ namespace Audio_Editor.Domain
                     var endBytes = (int) cutFromEnd.TotalMilliseconds * bytesPerMillisecond;
                     endBytes = endBytes - endBytes % rdr.WaveFormat.BlockAlign;
                     var endPos = (int) rdr.Length - endBytes;
-                    TrimWavFile(rdr, writer, startPos, endPos);
+                    TrimWavFile(writer, startPos, endPos);
                 }
             }
 
@@ -27,17 +27,17 @@ namespace Audio_Editor.Domain
             updater.UpdateAudio();
         }
 
-        public static void TrimWavFile(MediaFoundationReader reader, WaveFileWriter writer,
+        public static void TrimWavFile(WaveFileWriter writer,
             int startPos, int endPos)
         {
-            reader.Position = startPos;
+            Globals.reader.Position = startPos;
             var buffer = new byte[1024];
-            while (reader.Position < endPos)
+            while (Globals.reader.Position < endPos)
             {
-                var bytesRequired = (int) (endPos - reader.Position);
+                var bytesRequired = (int) (endPos - Globals.reader.Position);
                 if (bytesRequired <= 0) continue;
                 var bytesToRead = Math.Min(bytesRequired, buffer.Length);
-                var bytesRead = reader.Read(buffer, 0, bytesToRead);
+                var bytesRead = Globals.reader.Read(buffer, 0, bytesToRead);
                 if (bytesRead > 0) writer.Write(buffer, 0, bytesRead);
                 if (bytesRead == 0) break;
             }
