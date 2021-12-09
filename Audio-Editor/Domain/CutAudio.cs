@@ -25,6 +25,9 @@ namespace Audio_Editor.Domain
 
             var updater = new Updater();
             updater.UpdateAudio();
+            var saver = new Saver();
+            saver.SaveTrack(Environment.CurrentDirectory + @"\temp" + Globals.index + ".wav", 1);
+            updater.UpdateAudio();
         }
 
         public static void TrimWavFile(WaveFileWriter writer,
@@ -40,9 +43,7 @@ namespace Audio_Editor.Domain
                 var bytesRead = Globals.reader.Read(buffer, 0, bytesToRead);
                 if (bytesRead > 0) writer.Write(buffer, 0, bytesRead);
                 if (bytesRead == 0)
-                {
                     break;
-                }
             }
         }
     }

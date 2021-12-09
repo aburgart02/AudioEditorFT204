@@ -5,15 +5,15 @@ namespace Audio_Editor.Infrastructure
 {
     public interface ISaver
     {
-        void SaveTrack(SaveFileDialog sfd, int loopCount);
+        void SaveTrack(string fileName, int loopCount);
     }
 
     public class Saver : ISaver
     {
-        public void SaveTrack(SaveFileDialog sfd, int loopCount)
+        public void SaveTrack(string fileName, int loopCount)
         {
             using (var rdr = Globals.reader)
-            using (var waveFileWriter = new WaveFileWriter(sfd.FileName, rdr.WaveFormat))
+            using (var waveFileWriter = new WaveFileWriter(fileName, rdr.WaveFormat))
             {
                 var tracks = new MediaFoundationReader[loopCount];
                 for (var i = 0; i < loopCount; i++)

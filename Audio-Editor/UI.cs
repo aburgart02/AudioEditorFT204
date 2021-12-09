@@ -35,9 +35,9 @@ namespace Audio_Editor
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 if (loopCount == "")
-                    saver.SaveTrack(sfd, 1);
+                    saver.SaveTrack(sfd.FileName, 1);
                 else
-                    saver.SaveTrack(sfd, Convert.ToInt32(loopCount));
+                    saver.SaveTrack(sfd.FileName, Convert.ToInt32(loopCount));
             }
         }
 
@@ -107,8 +107,8 @@ namespace Audio_Editor
             myRendererSettings.BottomHeight = 64;
             WaveFormRenderer renderer = new WaveFormRenderer();
             var image = renderer.Render(Globals.reader, averagePeakProvider, myRendererSettings);
-            image.Save(@"B:\CreatingGames\AudioEditorFT204\test.png", ImageFormat.Png);
-            pictureBox1.Load(@"B:\CreatingGames\AudioEditorFT204\test.png");
+            image.Save(@"C:\Users\artem_000\Desktop\AudioEditorFT204\test.png", ImageFormat.Png);
+            pictureBox1.Load(@"C:\Users\artem_000\Desktop\AudioEditorFT204\test.png");
             pictureBox1.Show();
             chart1.Hide();
         }
