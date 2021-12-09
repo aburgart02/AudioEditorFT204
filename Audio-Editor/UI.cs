@@ -23,7 +23,7 @@ namespace Audio_Editor
         private void LoadButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog open_dialog = new OpenFileDialog();
-            var opener = new Infrastructure.Opener();
+            var opener = new Opener();
             opener.Open(open_dialog);
         }
 
@@ -107,8 +107,8 @@ namespace Audio_Editor
             myRendererSettings.BottomHeight = 64;
             WaveFormRenderer renderer = new WaveFormRenderer();
             var image = renderer.Render(Globals.reader, averagePeakProvider, myRendererSettings);
-            image.Save(@"C:\Users\artem_000\Desktop\AudioEditorFT204\test.png", ImageFormat.Png);
-            pictureBox1.Load(@"C:\Users\artem_000\Desktop\AudioEditorFT204\test.png");
+            image.Save(@"B:\CreatingGames\AudioEditorFT204\test.png", ImageFormat.Png);
+            pictureBox1.Load(@"B:\CreatingGames\AudioEditorFT204\test.png");
             pictureBox1.Show();
             chart1.Hide();
         }

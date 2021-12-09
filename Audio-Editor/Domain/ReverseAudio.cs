@@ -90,7 +90,8 @@ namespace Audio_Editor.Domain
 
             for (var i = 0; i < length; i++)
             {
-                if (i != 0 && i % bytesPerSample == 0) sampleIdentifier += 2 * bytesPerSample;
+                if (i != 0 && i % bytesPerSample == 0) 
+                    sampleIdentifier += 2 * bytesPerSample;
                 var index = length - bytesPerSample - sampleIdentifier + i;
                 reversedArrayWithOnlyAudioData[i] = forwardsArrayWithOnlyAudioData[index];
             }
