@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f4b91d18-aa86-4ade-a118-98b32da0acdb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Audio-Editor/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Audio-Editor/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Audio-Editor/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Audio-Editor/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Audio-Editor/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AudioEditorFT204.dir/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AudioEditorFT204.dir/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AudioEditorFT204.dir/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/Audio-Editor/v16/TestStore/0/000.testlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/Audio-Editor/v16/TestStore/0/testlog.manifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/VSWorkspaceState.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/slnx.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor.sln" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/App.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/ApplicationLayer/AudioChanger.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/ApplicationLayer/FormatConverter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Audio-Editor.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Domain/CutAudio.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Domain/Mp3ToWavConversion.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Domain/ReverseAudio.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Domain/ReverseMetadata.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Domain/WavToMp3Conversion.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Infrastructure/Globals.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Infrastructure/Opener.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Infrastructure/Saver.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Infrastructure/Updater.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Properties/Resources.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Properties/Resources.resx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Properties/Settings.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/Properties/Settings.settings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/UI.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/UI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/UI.resx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Audio-Editor/packages.config" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="229a5MogCWrFxo3NNxLkdMBwHGB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f4b91d18-aa86-4ade-a118-98b32da0acdb" name="Changes" comment="" />
+      <created>1639252076389</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1639252076389</updated>
+      <workItem from="1639252080545" duration="10000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
