@@ -15,7 +15,7 @@ namespace ApplicationLayer
     {
         public void CutFile(TimeSpan start, TimeSpan end, Data data)
         {
-            var fileWriter = new WaveFileWriter(Environment.CurrentDirectory + @"\temp" + data.index + ".wav", data.reader.WaveFormat);
+            var fileWriter = new WaveFileWriter(Environment.CurrentDirectory + @"\temp" + data.index + data.extension, data.reader.WaveFormat);
             CutAudio.TrimWavFile(start, end, data, fileWriter);
         }
 

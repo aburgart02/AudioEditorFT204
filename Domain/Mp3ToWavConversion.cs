@@ -12,6 +12,7 @@ namespace Domain
             {
                 WaveFileWriter.CreateWaveFile(Environment.CurrentDirectory + @"\temp" + data.index + ".wav", rdr);
             }
+            data.extension = ".wav";
             var updater = new Updater();
             updater.UpdateAudio(data);
         }

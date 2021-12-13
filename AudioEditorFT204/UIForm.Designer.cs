@@ -52,6 +52,7 @@ namespace UIForm
             this.label1 = new System.Windows.Forms.Label();
             this.LoopCountValue = new System.Windows.Forms.TextBox();
             this.Mp3ToWavButton = new System.Windows.Forms.Button();
+            this.WavToMp3Button = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -254,15 +255,26 @@ namespace UIForm
             this.Mp3ToWavButton.Name = "Mp3ToWavButton";
             this.Mp3ToWavButton.Size = new System.Drawing.Size(165, 43);
             this.Mp3ToWavButton.TabIndex = 17;
-            this.Mp3ToWavButton.Text = "Covert To Wave Format";
+            this.Mp3ToWavButton.Text = "Convert to Wave Format";
             this.Mp3ToWavButton.UseVisualStyleBackColor = true;
             this.Mp3ToWavButton.Click += new System.EventHandler(this.Mp3ToWavButton_Click);
+            // 
+            // WavToMp3Button
+            // 
+            this.WavToMp3Button.Location = new System.Drawing.Point(554, 215);
+            this.WavToMp3Button.Name = "WavToMp3Button";
+            this.WavToMp3Button.Size = new System.Drawing.Size(164, 42);
+            this.WavToMp3Button.TabIndex = 18;
+            this.WavToMp3Button.Text = "Convert to MP3 Format";
+            this.WavToMp3Button.UseVisualStyleBackColor = true;
+            this.WavToMp3Button.Click += new System.EventHandler(this.WavToMp3Button_Click);
             // 
             // UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.WavToMp3Button);
             this.Controls.Add(this.Mp3ToWavButton);
             this.Controls.Add(this.LoopCountValue);
             this.Controls.Add(this.label1);
@@ -313,6 +325,7 @@ namespace UIForm
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox LoopCountValue;
         private System.Windows.Forms.Button Mp3ToWavButton;
+        private System.Windows.Forms.Button WavToMp3Button;
     }
 }
 

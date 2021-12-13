@@ -13,9 +13,9 @@ namespace Infrastructure
         public void UpdateAudio(Data data)
         {
             data.reader =
-                new MediaFoundationReader(Environment.CurrentDirectory + @"\temp" + data.index + ".wav");
-            data.player.Open(new Uri(Environment.CurrentDirectory + @"\temp" + data.index + ".wav"));
-            data.path = Environment.CurrentDirectory + @"\temp" + data.index + ".wav";
+                new MediaFoundationReader(Environment.CurrentDirectory + @"\temp" + data.index + data.extension);
+            data.player.Open(new Uri(Environment.CurrentDirectory + @"\temp" + data.index + data.extension));
+            data.path = Environment.CurrentDirectory + @"\temp" + data.index + data.extension;
             data.index += 1;
         }
     }

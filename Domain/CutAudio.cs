@@ -25,7 +25,7 @@ namespace Domain
             var updater = new Updater();
             updater.UpdateAudio(data);
             var saver = new Saver();
-            saver.SaveTrack(Environment.CurrentDirectory + @"\temp" + data.index + ".wav", 1, data);
+            saver.SaveTrack(Environment.CurrentDirectory + @"\temp" + data.index + data.extension, 1, data);
             updater.UpdateAudio(data);
         }
 

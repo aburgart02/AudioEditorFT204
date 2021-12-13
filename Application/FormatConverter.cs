@@ -17,9 +17,9 @@ namespace ApplicationLayer
             Mp3ToWavConversion.ConvertMp3ToWav(data);
         }
 
-        public void ConvertWavToMp3()
+        public void ConvertWavToMp3(Data data)
         {
-            WavToMp3Conversion.ConvertWavToMp3();
+            WavToMp3Conversion.ConvertWavToMp3(data);
         }
     }
 }

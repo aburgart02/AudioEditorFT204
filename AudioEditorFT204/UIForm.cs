@@ -5,6 +5,7 @@ using NAudio.WaveFormRenderer;
 using System.Drawing.Imaging;
 using Infrastructure;
 using ApplicationLayer;
+using System.IO;
 
 namespace UIForm
 {
@@ -20,7 +21,8 @@ namespace UIForm
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            pictureBox1.Hide();
+            chart1.Hide();
         }
 
         private void LoadButton_Click(object sender, EventArgs e)
@@ -80,9 +82,10 @@ namespace UIForm
             var bufferSize = 16384 * sampleSize;
             var buffer = new byte[bufferSize];
             int read = 0;
-            chart1.Series.Add("wave");
-            chart1.Series["wave"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            chart1.Series["wave"].ChartArea = "ChartArea1";
+            chart1.Series.Clear();
+            chart1.Series.Add("Audio Wave");
+            chart1.Series["Audio Wave"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            chart1.Series["Audio Wave"].ChartArea = "ChartArea1";
             using (var inputStream = data.reader)
             {
                 using (var wave = new WaveChannel32(inputStream))
@@ -93,7 +96,7 @@ namespace UIForm
                         for (int i = 0; i < read / sampleSize; i++)
                         {
                             var point = BitConverter.ToSingle(buffer, i * sampleSize);
-                            chart1.Series["wave"].Points.Add(point);
+                            chart1.Series["Audio Wave"].Points.Add(point);
                         }
                     }
                 }
@@ -110,11 +113,16 @@ namespace UIForm
             myRendererSettings.TopHeight = 64;
             myRendererSettings.BottomHeight = 64;
             WaveFormRenderer renderer = new WaveFormRenderer();
-            var image = renderer.Render(data.reader, averagePeakProvider, myRendererSettings);
-            image.Save(@"C:\Users\artem_000\Desktop\AudioEditorFT204\test.png", ImageFormat.Png);
-            pictureBox1.Load(@"C:\Users\artem_000\Desktop\AudioEditorFT204\test.png");
-            pictureBox1.Show();
-            chart1.Hide();
+            using (var inputStream = data.reader)
+            {
+                if (!pictureBox1.Visible)
+                {
+                    var image = renderer.Render(inputStream, averagePeakProvider, myRendererSettings);
+                    pictureBox1.Image = image;
+                    chart1.Hide();
+                    pictureBox1.Show();
+                }
+            }
         }
 
         private void ReverseButton_Click(object sender, EventArgs e)
@@ -127,6 +135,12 @@ namespace UIForm
         {
             var formatConverter = new FormatConverter();
             formatConverter.ConvertMp3ToWav(data);
+        }
+
+        private void WavToMp3Button_Click(object sender, EventArgs e)
+        {
+            var formatConverter = new FormatConverter();
+            formatConverter.ConvertWavToMp3(data);
         }
     }
 }

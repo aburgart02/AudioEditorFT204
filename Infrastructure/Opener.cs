@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using System.Windows.Media;
 using NAudio.Wave;
@@ -18,6 +19,7 @@ namespace Infrastructure
             data.player.Open(new Uri(open_dialog.FileName));
             data.path = open_dialog.FileName;
             data.reader = new MediaFoundationReader(open_dialog.FileName);
+            data.extension = Path.GetExtension(open_dialog.FileName);
         }
     }
 }

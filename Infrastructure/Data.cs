@@ -9,6 +9,7 @@ namespace Infrastructure
         public MediaFoundationReader reader;
         public string path;
         public int index;
+        public string extension;
 
         public Data()
         {

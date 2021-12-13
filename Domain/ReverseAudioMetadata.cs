@@ -2,7 +2,7 @@
 
 namespace Domain
 {
-    internal static class ReverseMetadata
+    internal static class ReverseAudioMetadata
     {
         internal static ushort GetTypeOfFormat(byte[] forwardsWavFileStreamByteArray)
         {
