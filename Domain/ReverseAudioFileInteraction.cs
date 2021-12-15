@@ -6,7 +6,7 @@ namespace Domain
 {
     public class ReverseAudioFileInteraction
     {
-        protected static void writeReversedWavFileByteArrayToFile(byte[] reversedWavFileStreamByteArray, Data data)
+        public Data writeReversedWavFileByteArrayToFile(byte[] reversedWavFileStreamByteArray, Data data)
         {
             using (var reversedFileStream =
                 new FileStream(Environment.CurrentDirectory + @"\temp" + data.index + data.extension, FileMode.Create,
@@ -16,10 +16,10 @@ namespace Domain
             }
 
             var updater = new Updater();
-            updater.UpdateAudio(data);
+            return updater.UpdateAudio(data);
         }
 
-        protected static byte[] populateForwardsWavFileByteArray(string forwardsWavFilePath)
+        public byte[] populateForwardsWavFileByteArray(string forwardsWavFilePath)
         {
             var forwardsWavFileStream =
                 new FileStream(forwardsWavFilePath, FileMode.Open, FileAccess.Read, FileShare.Read);

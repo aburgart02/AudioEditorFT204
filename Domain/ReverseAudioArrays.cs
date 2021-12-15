@@ -4,7 +4,7 @@ namespace Domain
 {
     public class ReverseAudioArrays
     {
-        public static byte[] combineArrays(byte[] forwardsArrayWithOnlyHeaders, byte[] reversedArrayWithOnlyAudioData)
+        public byte[] combineArrays(byte[] forwardsArrayWithOnlyHeaders, byte[] reversedArrayWithOnlyAudioData)
         {
             var reversedWavFileStreamByteArray =
                 new byte[forwardsArrayWithOnlyHeaders.Length + reversedArrayWithOnlyAudioData.Length];
@@ -15,7 +15,7 @@ namespace Domain
             return reversedWavFileStreamByteArray;
         }
 
-        public static byte[] reverseTheForwardsArrayWithOnlyAudioData(int bytesPerSample,
+        public byte[] reverseTheForwardsArrayWithOnlyAudioData(int bytesPerSample,
             byte[] forwardsArrayWithOnlyAudioData)
         {
             var length = forwardsArrayWithOnlyAudioData.Length;
@@ -34,7 +34,7 @@ namespace Domain
             return reversedArrayWithOnlyAudioData;
         }
 
-        public static byte[] createForwardsArrayWithOnlyAudioData(byte[] forwardsWavFileStreamByteArray,
+        public byte[] createForwardsArrayWithOnlyAudioData(byte[] forwardsWavFileStreamByteArray,
             int startIndexOfDataChunk)
         {
             var forwardsArrayWithOnlyAudioData =
@@ -44,7 +44,7 @@ namespace Domain
             return forwardsArrayWithOnlyAudioData;
         }
 
-        public static byte[] createForwardsArrayWithOnlyHeaders(byte[] forwardsWavFileStreamByteArray,
+        public byte[] createForwardsArrayWithOnlyHeaders(byte[] forwardsWavFileStreamByteArray,
             int startIndexOfDataChunk)
         {
             var forwardsArrayWithOnlyHeaders = new byte[startIndexOfDataChunk];

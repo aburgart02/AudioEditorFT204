@@ -1,19 +1,20 @@
-﻿using System.Windows.Media;
-using NAudio.Wave;
+﻿using NAudio.Wave;
 
 namespace Infrastructure
 {
     public class Data
     {
-        public MediaPlayer player;
         public MediaFoundationReader reader;
         public string path;
         public int index;
         public string extension;
 
-        public Data()
+        public Data(MediaFoundationReader rdr, string pth, int indx, string ext)
         {
-            player = new MediaPlayer();
+            reader = rdr;
+            path = pth;
+            index = indx;
+            extension = ext;
         }
     }
 }

@@ -6,7 +6,14 @@ namespace Domain
 {
     public class Mp3ToWavConversion
     {
-        public static void ConvertMp3ToWav(Data data)
+        private Data data;
+
+        public Mp3ToWavConversion(Data data)
+        {
+            this.data = data;
+        }
+
+        public Data ConvertMp3ToWav()
         {
             using (var rdr = data.reader)
             {
@@ -14,7 +21,7 @@ namespace Domain
             }
             data.extension = ".wav";
             var updater = new Updater();
-            updater.UpdateAudio(data);
+            return updater.UpdateAudio(data);
         }
     }
 }

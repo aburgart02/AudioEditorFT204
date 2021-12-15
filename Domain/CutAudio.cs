@@ -6,7 +6,14 @@ namespace Domain
 {
     public class CutAudio
     {
-        public static void TrimWavFile(TimeSpan cutFromStart, TimeSpan cutFromEnd, Data data, WaveFileWriter fileWriter)
+        private Data data;
+
+        public CutAudio(Data data)
+        {
+            this.data = data;
+        }
+
+        public Data TrimWavFile(TimeSpan cutFromStart, TimeSpan cutFromEnd, WaveFileWriter fileWriter)
         {
             using (var rdr = data.reader)
             {
@@ -23,13 +30,13 @@ namespace Domain
             }
 
             var updater = new Updater();
-            updater.UpdateAudio(data);
+            var data2 = updater.UpdateAudio(data);
             var saver = new Saver();
-            saver.SaveTrack(Environment.CurrentDirectory + @"\temp" + data.index + data.extension, 1, data);
-            updater.UpdateAudio(data);
+            saver.SaveTrack(Environment.CurrentDirectory + @"\temp" + data2.index + data2.extension, 1, data2);
+            return updater.UpdateAudio(data2);
         }
 
-        public static void TrimWavFile(WaveFileWriter writer,
+        private void TrimWavFile(WaveFileWriter writer,
             int startPos, int endPos, MediaFoundationReader reader)
         {
             reader.Position = startPos;

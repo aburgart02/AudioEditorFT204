@@ -2,54 +2,66 @@
 
 namespace Domain
 {
-    public class ReverseAudio : ReverseAudioFileInteraction
+    public class ReverseAudio
     {
         private const int _bitsPerByte = 8;
         private static int _bytesPerSample;
+        private Data data;
+        private readonly ReverseAudioFileInteraction fileInteraction;
+        private readonly ReverseAudioArrays arraysInteraction;
+        private readonly ReverseAudioMetadata reverseMetadata;
 
-        public static void Start(Data data)
+        public ReverseAudio(ReverseAudioFileInteraction fi, ReverseAudioArrays ai, ReverseAudioMetadata rm, Data data)
         {
-            var forwardsWavFileStreamByteArray = populateForwardsWavFileByteArray(data.path);
+            fileInteraction = fi;
+            arraysInteraction = ai;
+            reverseMetadata = rm;
+            this.data = data;
+        }
+
+        public Data Start()
+        {
+            var forwardsWavFileStreamByteArray = fileInteraction.populateForwardsWavFileByteArray(data.path);
             getWavMetadata(forwardsWavFileStreamByteArray);
             var startIndexOfDataChunk = getStartIndexOfDataChunk(forwardsWavFileStreamByteArray);
             var reversedWavFileStreamByteArray = populateReversedWavFileByteArray(forwardsWavFileStreamByteArray,
                 startIndexOfDataChunk, _bytesPerSample);
-            writeReversedWavFileByteArrayToFile(reversedWavFileStreamByteArray, data);
+            return fileInteraction.writeReversedWavFileByteArrayToFile(reversedWavFileStreamByteArray, data);
         }
 
-        private static byte[] populateReversedWavFileByteArray(byte[] forwardsWavFileStreamByteArray,
+        private byte[] populateReversedWavFileByteArray(byte[] forwardsWavFileStreamByteArray,
             int startIndexOfDataChunk, int bytesPerSample)
         {
-            var forwardsArrayWithOnlyHeaders =
-                ReverseAudioArrays.createForwardsArrayWithOnlyHeaders(forwardsWavFileStreamByteArray, startIndexOfDataChunk);
+            var forwardsArrayWithOnlyHeaders = 
+                arraysInteraction.createForwardsArrayWithOnlyHeaders(forwardsWavFileStreamByteArray, startIndexOfDataChunk);
             var forwardsArrayWithOnlyAudioData =
-                ReverseAudioArrays.createForwardsArrayWithOnlyAudioData(forwardsWavFileStreamByteArray, startIndexOfDataChunk);
+                arraysInteraction.createForwardsArrayWithOnlyAudioData(forwardsWavFileStreamByteArray, startIndexOfDataChunk);
             var reversedArrayWithOnlyAudioData =
-                ReverseAudioArrays.reverseTheForwardsArrayWithOnlyAudioData(bytesPerSample, forwardsArrayWithOnlyAudioData);
+                arraysInteraction.reverseTheForwardsArrayWithOnlyAudioData(bytesPerSample, forwardsArrayWithOnlyAudioData);
             var reversedWavFileStreamByteArray =
-                ReverseAudioArrays.combineArrays(forwardsArrayWithOnlyHeaders, reversedArrayWithOnlyAudioData);
+                arraysInteraction.combineArrays(forwardsArrayWithOnlyHeaders, reversedArrayWithOnlyAudioData);
             return reversedWavFileStreamByteArray;
         }
 
-        private static void getWavMetadata(byte[] forwardsWavFileStreamByteArray)
+        private void getWavMetadata(byte[] forwardsWavFileStreamByteArray)
         {
-            ReverseAudioMetadata.GetRiffText(forwardsWavFileStreamByteArray);
-            ReverseAudioMetadata.GetFileSize(forwardsWavFileStreamByteArray);
-            ReverseAudioMetadata.GetWaveText(forwardsWavFileStreamByteArray);
-            ReverseAudioMetadata.GetFmtText(forwardsWavFileStreamByteArray);
-            ReverseAudioMetadata.GetLengthOfFormatData(forwardsWavFileStreamByteArray);
-            ReverseAudioMetadata.GetTypeOfFormat(forwardsWavFileStreamByteArray);
-            ReverseAudioMetadata.GetNumOfChannels(forwardsWavFileStreamByteArray);
-            ReverseAudioMetadata.GetSampleRate(forwardsWavFileStreamByteArray);
-            ReverseAudioMetadata.GetBytesPerSecond(forwardsWavFileStreamByteArray);
-            ReverseAudioMetadata.GetBlockAlign(forwardsWavFileStreamByteArray);
-            _bytesPerSample = ReverseAudioMetadata.GetBitsPerSample(forwardsWavFileStreamByteArray) / _bitsPerByte;
-            ReverseAudioMetadata.GetListText(forwardsWavFileStreamByteArray);
-            ReverseAudioMetadata.GetDataText(forwardsWavFileStreamByteArray);
-            ReverseAudioMetadata.GetDataSize(forwardsWavFileStreamByteArray);
+            reverseMetadata.GetRiffText(forwardsWavFileStreamByteArray);
+            reverseMetadata.GetFileSize(forwardsWavFileStreamByteArray);
+            reverseMetadata.GetWaveText(forwardsWavFileStreamByteArray);
+            reverseMetadata.GetFmtText(forwardsWavFileStreamByteArray);
+            reverseMetadata.GetLengthOfFormatData(forwardsWavFileStreamByteArray);
+            reverseMetadata.GetTypeOfFormat(forwardsWavFileStreamByteArray);
+            reverseMetadata.GetNumOfChannels(forwardsWavFileStreamByteArray);
+            reverseMetadata.GetSampleRate(forwardsWavFileStreamByteArray);
+            reverseMetadata.GetBytesPerSecond(forwardsWavFileStreamByteArray);
+            reverseMetadata.GetBlockAlign(forwardsWavFileStreamByteArray);
+            _bytesPerSample = reverseMetadata.GetBitsPerSample(forwardsWavFileStreamByteArray) / _bitsPerByte;
+            reverseMetadata.GetListText(forwardsWavFileStreamByteArray);
+            reverseMetadata.GetDataText(forwardsWavFileStreamByteArray);
+            reverseMetadata.GetDataSize(forwardsWavFileStreamByteArray);
         }
 
-        private static int getStartIndexOfDataChunk(byte[] forwardsWavFileStreamByteArray)
+        private int getStartIndexOfDataChunk(byte[] forwardsWavFileStreamByteArray)
         {
             var startIndexOfAudioData = 12;
             var charDAsciiDecimalCode = 100;

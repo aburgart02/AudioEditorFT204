@@ -9,8 +9,14 @@ namespace Domain
     public class WavToMp3Conversion
     {
         public static byte[] arr;
+        private Data data;
 
-        public static void ConvertWavToMp3(Data data)
+        public WavToMp3Conversion(Data data)
+        {
+            this.data = data;
+        }
+
+        public Data ConvertWavToMp3()
         {
             CheckAddBinPath();
             using (var retMs = new MemoryStream())
@@ -28,10 +34,10 @@ namespace Domain
             }
             data.extension = ".mp3";
             var updater = new Updater();
-            updater.UpdateAudio(data);
+            return updater.UpdateAudio(data);
         }
 
-        public static void CheckAddBinPath()
+        public void CheckAddBinPath()
         {
             var binPath = Path.Combine(new string[] { AppDomain.CurrentDomain.BaseDirectory, "bin" });
             var path = Environment.GetEnvironmentVariable("PATH") ?? "";

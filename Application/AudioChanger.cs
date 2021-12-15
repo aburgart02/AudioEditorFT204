@@ -8,20 +8,34 @@ namespace ApplicationLayer
 {
     public interface IAudioChanger
     {
-        void CutFile(TimeSpan start, TimeSpan end, Data data);
+        Data CutFile(TimeSpan start, TimeSpan end);
     }
 
     public class AudioChanger : IAudioChanger
     {
-        public void CutFile(TimeSpan start, TimeSpan end, Data data)
+        private Data data;
+        private ReverseAudioFileInteraction fileInteraction;
+        private ReverseAudioArrays arraysInteraction;
+        private ReverseAudioMetadata reverseMetadata;
+
+        public AudioChanger(Data data)
         {
-            var fileWriter = new WaveFileWriter(Environment.CurrentDirectory + @"\temp" + data.index + data.extension, data.reader.WaveFormat);
-            CutAudio.TrimWavFile(start, end, data, fileWriter);
+            this.data = data;
+            fileInteraction = new ReverseAudioFileInteraction();
+            arraysInteraction = new ReverseAudioArrays();
+            reverseMetadata = new ReverseAudioMetadata();
         }
 
-        public void ReverseFile(Data data)
+        public Data CutFile(TimeSpan start, TimeSpan end)
         {
-            ReverseAudio.Start(data);
+            var fileWriter = new WaveFileWriter(Environment.CurrentDirectory + @"\temp" + data.index + data.extension, 
+                data.reader.WaveFormat);
+            return new CutAudio(data).TrimWavFile(start, end, fileWriter);
+        }
+
+        public Data ReverseFile()
+        {
+            return new ReverseAudio(fileInteraction, arraysInteraction, reverseMetadata, data).Start();
         }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Domain
 {
-    internal static class ReverseAudioMetadata
+    public class ReverseAudioMetadata
     {
-        internal static ushort GetTypeOfFormat(byte[] forwardsWavFileStreamByteArray)
+        public ushort GetTypeOfFormat(byte[] forwardsWavFileStreamByteArray)
         {
             var startIndex = 20;
             var endIndex = 21;
@@ -15,28 +15,28 @@ namespace Domain
             return typeOfFormat;
         }
 
-        internal static void GetFmtText(byte[] forwardsWavFileStreamByteArray)
+        public void GetFmtText(byte[] forwardsWavFileStreamByteArray)
         {
             var startIndex = 12;
             var endIndex = 15;
             GetAsciiText(forwardsWavFileStreamByteArray, startIndex, endIndex);
         }
 
-        internal static string GetWaveText(byte[] forwardsWavFileStreamByteArray)
+        public string GetWaveText(byte[] forwardsWavFileStreamByteArray)
         {
             var startIndex = 8;
             var endIndex = 11;
             return GetAsciiText(forwardsWavFileStreamByteArray, startIndex, endIndex);
         }
 
-        internal static string GetRiffText(byte[] forwardsWavFileStreamByteArray)
+        public string GetRiffText(byte[] forwardsWavFileStreamByteArray)
         {
             var startIndex = 0;
             var endIndex = 3;
             return GetAsciiText(forwardsWavFileStreamByteArray, startIndex, endIndex);
         }
 
-        internal static uint GetLengthOfFormatData(byte[] forwardsWavFileStreamByteArray)
+        public uint GetLengthOfFormatData(byte[] forwardsWavFileStreamByteArray)
         {
             var startIndex = 16;
             var endIndex = 19;
@@ -47,7 +47,7 @@ namespace Domain
             return lengthOfFormatData;
         }
 
-        internal static byte[] GetRelevantBytesIntoNewArray(byte[] forwardsWavFileStreamByteArray, int startIndex,
+        public byte[] GetRelevantBytesIntoNewArray(byte[] forwardsWavFileStreamByteArray, int startIndex,
             int endIndex)
         {
             var length = endIndex - startIndex + 1;
@@ -56,7 +56,7 @@ namespace Domain
             return relevantBytesArray;
         }
 
-        internal static uint GetFileSize(byte[] forwardsWavFileStreamByteArray)
+        public uint GetFileSize(byte[] forwardsWavFileStreamByteArray)
         {
             var fileSizeStartIndex = 4;
             var fileSizeEndIndex = 7;
@@ -67,7 +67,7 @@ namespace Domain
             return fileSize;
         }
 
-        internal static string GetAsciiText(byte[] forwardsWavFileStreamByteArray, int startIndex, int endIndex)
+        public string GetAsciiText(byte[] forwardsWavFileStreamByteArray, int startIndex, int endIndex)
         {
             var asciiText = "";
             for (var i = startIndex; i <= endIndex; i++) asciiText += Convert.ToChar(forwardsWavFileStreamByteArray[i]);
@@ -75,7 +75,7 @@ namespace Domain
             return asciiText;
         }
 
-        internal static ushort GetNumOfChannels(byte[] forwardsWavFileStreamByteArray)
+        public ushort GetNumOfChannels(byte[] forwardsWavFileStreamByteArray)
         {
             var numOfChannelsStartIndex = 22;
             var numOfChannelsEndIndex = 23;
@@ -86,7 +86,7 @@ namespace Domain
             return numOfChannels;
         }
 
-        internal static uint GetSampleRate(byte[] forwardsWavFileStreamByteArray)
+        public uint GetSampleRate(byte[] forwardsWavFileStreamByteArray)
         {
             var sampleRateStartIndex = 24;
             var sampleRateEndIndex = 27;
@@ -97,7 +97,7 @@ namespace Domain
             return sampleRate;
         }
 
-        internal static uint GetBytesPerSecond(byte[] forwardsWavFileStreamByteArray)
+        public uint GetBytesPerSecond(byte[] forwardsWavFileStreamByteArray)
         {
             var bytesPerSecondStartIndex = 28;
             var bytesPerSecondEndIndex = 31;
@@ -108,7 +108,7 @@ namespace Domain
             return bytesPerSecond;
         }
 
-        internal static ushort GetBlockAlign(byte[] forwardsWavFileStreamByteArray)
+        public ushort GetBlockAlign(byte[] forwardsWavFileStreamByteArray)
         {
             var blockAlignStartIndex = 32;
             var blockAlignEndIndex = 33;
@@ -119,7 +119,7 @@ namespace Domain
             return blockAlign;
         }
 
-        internal static ushort GetBitsPerSample(byte[] forwardsWavFileStreamByteArray)
+        public ushort GetBitsPerSample(byte[] forwardsWavFileStreamByteArray)
         {
             var bitsPerSampleStartIndex = 34;
             var bitsPerSampleEndIndex = 35;
@@ -130,21 +130,21 @@ namespace Domain
             return bitsPerSample;
         }
 
-        internal static void GetDataText(byte[] forwardsWavFileStreamByteArray)
+        public void GetDataText(byte[] forwardsWavFileStreamByteArray)
         {
             var startIndex = 70;
             var endIndex = 73;
             GetAsciiText(forwardsWavFileStreamByteArray, startIndex, endIndex);
         }
 
-        internal static void GetListText(byte[] forwardsWavFileStreamByteArray)
+        public void GetListText(byte[] forwardsWavFileStreamByteArray)
         {
             var startIndex = 36;
             var endIndex = 39;
             GetAsciiText(forwardsWavFileStreamByteArray, startIndex, endIndex);
         }
 
-        internal static uint GetDataSize(byte[] forwardsWavFileStreamByteArray)
+        public uint GetDataSize(byte[] forwardsWavFileStreamByteArray)
         {
             var dataSizeStartIndex = 70;
             var dataSizeEndIndex = 73;
