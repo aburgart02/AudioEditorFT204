@@ -3,29 +3,24 @@ using Infrastructure;
 
 namespace ApplicationLayer
 {
-    public interface IConverter
+    public interface IConvert
     {
-        Data ConvertMp3ToWav();
-        Data ConvertWavToMp3();
+        Data Convert(Data data);
     }
 
-    public class FormatConverter : IConverter
+    public class WavToMp3Converter : IConvert
     {
-        private Data data;
-
-        public FormatConverter(Data data)
+        public Data Convert(Data data)
         {
-            this.data = data;
+            return new WavToMp3Conversion().ConvertWavToMp3(data);
         }
+    }
 
-        public Data ConvertMp3ToWav()
+    public class Mp3ToWavConverter : IConvert
+    {
+        public Data Convert(Data data)
         {
-            return new Mp3ToWavConversion(data).ConvertMp3ToWav();
-        }
-
-        public Data ConvertWavToMp3()
-        {
-            return new WavToMp3Conversion(data).ConvertWavToMp3();
+            return new Mp3ToWavConversion().ConvertMp3ToWav(data);
         }
     }
 }

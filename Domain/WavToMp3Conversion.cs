@@ -3,24 +3,19 @@ using System.IO;
 using NAudio.Lame;
 using System;
 using System.Linq;
+using NAudio.Wave;
 
 namespace Domain
 {
     public class WavToMp3Conversion
     {
         public static byte[] arr;
-        private Data data;
 
-        public WavToMp3Conversion(Data data)
-        {
-            this.data = data;
-        }
-
-        public Data ConvertWavToMp3()
+        public Data ConvertWavToMp3(Data data)
         {
             CheckAddBinPath();
             using (var retMs = new MemoryStream())
-            using (var rdr = data.reader)
+            using (var rdr = new MediaFoundationReader(data.path))
             using (var wtr = new LameMP3FileWriter(retMs, rdr.WaveFormat, 128))
             {
                 rdr.CopyTo(wtr);

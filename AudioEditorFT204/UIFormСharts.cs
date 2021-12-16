@@ -17,7 +17,7 @@ namespace UIForm
             chart1.Series.Add("Audio Wave");
             chart1.Series["Audio Wave"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
             chart1.Series["Audio Wave"].ChartArea = "ChartArea1";
-            using (var inputStream = data.reader)
+            using (var inputStream = new MediaFoundationReader(data.path))
             {
                 using (var wave = new WaveChannel32(inputStream))
                 {
@@ -44,7 +44,7 @@ namespace UIForm
             myRendererSettings.TopHeight = 64;
             myRendererSettings.BottomHeight = 64;
             WaveFormRenderer renderer = new WaveFormRenderer();
-            using (var inputStream = data.reader)
+            using (var inputStream = new MediaFoundationReader(data.path))
             {
                 if (!pictureBox1.Visible)
                 {

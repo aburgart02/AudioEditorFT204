@@ -10,11 +10,17 @@ namespace UIForm
     {
         private Data data;
         private MediaPlayer player;
+        private AudioChanger audioChanger;
+        private Mp3ToWavConverter mp3ToWavConverter;
+        private WavToMp3Converter wavToMp3Converter;
 
-        public UI()
+        public UI(MediaPlayer player, AudioChanger audioChanger, Mp3ToWavConverter mp3ToWavConverter, WavToMp3Converter wavToMp3Converter)
         {
             InitializeComponent();
-            player = new MediaPlayer();
+            this.player = player;
+            this.audioChanger = audioChanger;
+            this.mp3ToWavConverter = mp3ToWavConverter;
+            this.wavToMp3Converter = wavToMp3Converter;
         }
 
         private void Form1_Load(object sender, EventArgs e)
