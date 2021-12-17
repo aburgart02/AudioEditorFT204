@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain;
 using System.Windows.Forms;
 using Infrastructure;
 using ApplicationLayer;
@@ -11,14 +12,26 @@ namespace UIForm
         private Data data;
         private MediaPlayer player;
         private AudioChanger audioChanger;
+        private Opener opener;
+        private Saver saver;
+        private CutAudio cutAudio;
+        private ReverseAudio reverseAudio;
+        private Converter converter;
         private Mp3ToWavConverter mp3ToWavConverter;
         private WavToMp3Converter wavToMp3Converter;
 
-        public UI(MediaPlayer player, AudioChanger audioChanger, Mp3ToWavConverter mp3ToWavConverter, WavToMp3Converter wavToMp3Converter)
+        public UI(MediaPlayer player, AudioChanger audioChanger, Mp3ToWavConverter mp3ToWavConverter, 
+            WavToMp3Converter wavToMp3Converter, Opener opener, Saver saver, CutAudio cutAudio, 
+            ReverseAudio reverseAudio, Converter converter)
         {
             InitializeComponent();
             this.player = player;
             this.audioChanger = audioChanger;
+            this.opener = opener;
+            this.saver = saver;
+            this.reverseAudio = reverseAudio;
+            this.cutAudio = cutAudio;
+            this.converter = converter;
             this.mp3ToWavConverter = mp3ToWavConverter;
             this.wavToMp3Converter = wavToMp3Converter;
         }
@@ -32,7 +45,6 @@ namespace UIForm
         private void LoadButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog open_dialog = new OpenFileDialog();
-            var opener = new Opener();
             if (open_dialog.ShowDialog() == DialogResult.OK)
             {
                 player.Open(new Uri(open_dialog.FileName));
@@ -43,7 +55,6 @@ namespace UIForm
         public void SaveButton_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            var saver = new Saver();
             var loopCount = LoopCountValue.Text;
             if (sfd.ShowDialog() == DialogResult.OK)
             {

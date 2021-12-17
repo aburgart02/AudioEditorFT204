@@ -5,22 +5,22 @@ namespace ApplicationLayer
 {
     public interface IConvert
     {
-        Data Convert(Data data);
+        Data Convert(Data data, Converter converter);
     }
 
     public class WavToMp3Converter : IConvert
     {
-        public Data Convert(Data data)
+        public Data Convert(Data data, Converter converter)
         {
-            return new WavToMp3Conversion().ConvertWavToMp3(data);
+            return converter.ConvertWavToMp3(data);
         }
     }
 
     public class Mp3ToWavConverter : IConvert
     {
-        public Data Convert(Data data)
+        public Data Convert(Data data, Converter converter)
         {
-            return new Mp3ToWavConversion().ConvertMp3ToWav(data);
+            return converter.ConvertMp3ToWav(data);
         }
     }
 }
