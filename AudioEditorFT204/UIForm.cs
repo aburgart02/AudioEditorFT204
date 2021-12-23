@@ -10,15 +10,15 @@ namespace UIForm
     public partial class UI : Form
     {
         private Data data;
-        private MediaPlayer player;
-        private AudioChanger audioChanger;
-        private Opener opener;
-        private Saver saver;
-        private CutAudio cutAudio;
-        private ReverseAudio reverseAudio;
-        private Converter converter;
-        private Mp3ToWavConverter mp3ToWavConverter;
-        private WavToMp3Converter wavToMp3Converter;
+        private readonly MediaPlayer player;
+        private readonly AudioChanger audioChanger;
+        private readonly Opener opener;
+        private readonly Saver saver;
+        private readonly CutAudio cutAudio;
+        private readonly ReverseAudio reverseAudio;
+        private readonly Converter converter;
+        private readonly Mp3ToWavConverter mp3ToWavConverter;
+        private readonly WavToMp3Converter wavToMp3Converter;
 
         public UI(MediaPlayer player, AudioChanger audioChanger, Mp3ToWavConverter mp3ToWavConverter, 
             WavToMp3Converter wavToMp3Converter, Opener opener, Saver saver, CutAudio cutAudio, 

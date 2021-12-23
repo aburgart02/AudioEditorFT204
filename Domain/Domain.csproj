@@ -78,11 +78,13 @@
   <ItemGroup>
     <Compile Include="CutAudio.cs" />
     <Compile Include="Converter.cs" />
+    <Compile Include="Mp3ToWavConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReverseAudio.cs" />
     <Compile Include="ReverseAudioArrays.cs" />
     <Compile Include="ReverseAudioMetadata.cs" />
     <Compile Include="ReverseAudioFileInteraction.cs" />
+    <Compile Include="WavToMp3Converter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
