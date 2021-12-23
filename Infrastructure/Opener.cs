@@ -14,8 +14,7 @@ namespace Infrastructure
     {
         public Data Open(string path)
         {
-            return new Data(new MediaFoundationReader(path), path,
-                0, Path.GetExtension(path));
+            return new Data(path, 0, Path.GetExtension(path));
         }
     }
 }

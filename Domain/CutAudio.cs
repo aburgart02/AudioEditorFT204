@@ -6,16 +6,9 @@ namespace Domain
 {
     public class CutAudio
     {
-        private Data data;
-
-        public CutAudio(Data data)
+        public Data TrimWavFile(TimeSpan cutFromStart, TimeSpan cutFromEnd, WaveFileWriter fileWriter, Data data)
         {
-            this.data = data;
-        }
-
-        public Data TrimWavFile(TimeSpan cutFromStart, TimeSpan cutFromEnd, WaveFileWriter fileWriter)
-        {
-            using (var rdr = data.reader)
+            using (var rdr = new MediaFoundationReader(data.path))
             {
                 using (var writer = fileWriter)
                 {
@@ -25,7 +18,7 @@ namespace Domain
                     var endBytes = (int)cutFromEnd.TotalMilliseconds * bytesPerMillisecond;
                     endBytes = endBytes - endBytes % rdr.WaveFormat.BlockAlign;
                     var endPos = (int)rdr.Length - endBytes;
-                    TrimWavFile(writer, startPos, endPos, data.reader);
+                    TrimWavFile(writer, startPos, endPos, rdr);
                 }
             }
 

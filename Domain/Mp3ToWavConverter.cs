@@ -1,21 +1,14 @@
-﻿using System;
-using Infrastructure;
+﻿using Infrastructure;
 using NAudio.Wave;
+using System;
 
 namespace Domain
 {
-    public class Mp3ToWavConversion
+    public class Mp3ToWavConverter
     {
-        private Data data;
-
-        public Mp3ToWavConversion(Data data)
+        public Data ConvertMp3ToWav(Data data)
         {
-            this.data = data;
-        }
-
-        public Data ConvertMp3ToWav()
-        {
-            using (var rdr = data.reader)
+            using (var rdr = new MediaFoundationReader(data.path))
             {
                 WaveFileWriter.CreateWaveFile(Environment.CurrentDirectory + @"\temp" + data.index + ".wav", rdr);
             }

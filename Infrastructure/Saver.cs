@@ -11,7 +11,7 @@ namespace Infrastructure
     {
         public void SaveTrack(string fileName, int loopCount, Data data)
         {
-            using (var rdr = data.reader)
+            using (var rdr = new MediaFoundationReader(data.path))
             using (var waveFileWriter = new WaveFileWriter(fileName, rdr.WaveFormat))
             {
                 var tracks = new MediaFoundationReader[loopCount];

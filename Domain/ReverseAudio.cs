@@ -5,39 +5,37 @@ namespace Domain
     public class ReverseAudio
     {
         private const int _bitsPerByte = 8;
-        private static int _bytesPerSample;
-        private Data data;
+        private int _bytesPerSample;
         private readonly ReverseAudioFileInteraction fileInteraction;
         private readonly ReverseAudioArrays arraysInteraction;
         private readonly ReverseAudioMetadata reverseMetadata;
 
-        public ReverseAudio(ReverseAudioFileInteraction fi, ReverseAudioArrays ai, ReverseAudioMetadata rm, Data data)
+        public ReverseAudio(ReverseAudioFileInteraction fi, ReverseAudioArrays ai, ReverseAudioMetadata rm)
         {
             fileInteraction = fi;
             arraysInteraction = ai;
             reverseMetadata = rm;
-            this.data = data;
         }
 
-        public Data Start()
+        public Data Start(Data data)
         {
             var forwardsWavFileStreamByteArray = fileInteraction.populateForwardsWavFileByteArray(data.path);
             getWavMetadata(forwardsWavFileStreamByteArray);
             var startIndexOfDataChunk = getStartIndexOfDataChunk(forwardsWavFileStreamByteArray);
             var reversedWavFileStreamByteArray = populateReversedWavFileByteArray(forwardsWavFileStreamByteArray,
-                startIndexOfDataChunk, _bytesPerSample);
+                startIndexOfDataChunk);
             return fileInteraction.writeReversedWavFileByteArrayToFile(reversedWavFileStreamByteArray, data);
         }
 
         private byte[] populateReversedWavFileByteArray(byte[] forwardsWavFileStreamByteArray,
-            int startIndexOfDataChunk, int bytesPerSample)
+            int startIndexOfDataChunk)
         {
             var forwardsArrayWithOnlyHeaders = 
                 arraysInteraction.createForwardsArrayWithOnlyHeaders(forwardsWavFileStreamByteArray, startIndexOfDataChunk);
             var forwardsArrayWithOnlyAudioData =
                 arraysInteraction.createForwardsArrayWithOnlyAudioData(forwardsWavFileStreamByteArray, startIndexOfDataChunk);
             var reversedArrayWithOnlyAudioData =
-                arraysInteraction.reverseTheForwardsArrayWithOnlyAudioData(bytesPerSample, forwardsArrayWithOnlyAudioData);
+                arraysInteraction.reverseTheForwardsArrayWithOnlyAudioData(_bytesPerSample, forwardsArrayWithOnlyAudioData);
             var reversedWavFileStreamByteArray =
                 arraysInteraction.combineArrays(forwardsArrayWithOnlyHeaders, reversedArrayWithOnlyAudioData);
             return reversedWavFileStreamByteArray;
