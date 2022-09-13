@@ -10,6 +10,7 @@ namespace Infrastructure
 
         public Data(string pth, int indx, string ext)
         {
+
             path = pth;
             index = indx;
             extension = ext;
